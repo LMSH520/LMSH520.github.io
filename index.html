@@ -1,361 +1,221 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>李明轩 - 前端开发作品集</title>
-  <style>
-    /* ========== 全局变量 ========== */
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8f9fa;
-      --text-primary: #212529;
-      --text-secondary: #495057;
-      --border-color: #e9ecef;
-      --accent-color: #3498db;
-      --card-bg: #ffffff;
-      --shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :rt {
-        --bg-primary: #121212;
-        --bg-secondary: #1e1e1e;
-        --text-primary: #e0e0e0;
-        --text-secondary: #b0b0b0;
-        --border-color: #333;
-        --accent-color: #4da6ff;
-        --card-bg: #252525;
-        --shadow: 0 4px 20px rgba(0,0,0,0.3);
-      }
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-      line-height: 1.6;
-      color: var(--text-primary);
-      background-color: var(--bg-secondary);
-      scroll-behavior: smooth;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* ========== 导航栏 ========== */
-    nav {
-      position: sticky;
-      top: 0;
-      background: var(--card-bg);
-      padding: 15px 0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      z-index: 100;
-    }
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      list-style: none;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 600;
-      padding: 5px 0;
-      position: relative;
-    }
-    .nav-links a:hover {
-      color: var(--accent-color);
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent-color);
-      transition: width 0.3s;
-    }
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* ========== 通用区块 ========== */
-    section {
-      padding: 80px 0;
-    }
-    h2 {
-      text-align: center;
-      font-size: 2.2em;
-      margin-bottom: 50px;
-      color: var(--accent-color);
-    }
-
-    /* ========== Hero 区 ========== */
-    .hero {
-      text-align: center;
-      padding: 100px 0;
-    }
-    .avatar {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--accent-color);
-      margin-bottom: 20px;
-      box-shadow: var(--shadow);
-    }
-    .hero h1 {
-      font-size: 2.8em;
-      margin-bottom: 15px;
-    }
-    .hero p {
-      font-size: 1.2em;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* ========== 技能 ========== */
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 20px;
-    }
-    .skill-tag {
-      background: var(--accent-color);
-      color: white;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.95em;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    /* ========== 项目 ========== */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    .project-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s;
-    }
-    .project-card:hover {
-      transform: translateY(-5px);
-    }
-    .project-img {
-      width: 100%;
-      height: 180px;
-      background: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #888;
-      font-size: 0.9em;
-    }
-    .project-content {
-      padding: 20px;
-    }
-    .project-content h3 {
-      margin-bottom: 10px;
-      color: var(--text-primary);
-    }
-    .project-tech {
-      color: var(--accent-color);
-      font-size: 0.9em;
-      margin-bottom: 12px;
-    }
-
-    /* ========== 联系 ========== */
-    .contact-card {
-      background: var(--card-bg);
-      padding: 40px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .contact-card a {
-      color: var(--accent-color);
-      text-decoration: none;
-    }
-    .contact-card a:hover {
-      text-decoration: underline;
-    }
-
-    /* ========== 返回顶部 ========== */
-    #back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      background: var(--accent-color);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    #back-to-top.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* ========== 打印样式 ========== */
-    @media print {
-      nav, #back-to-top { display: none !important; }
-      body { background: white !important; color: black !important; }
-      .project-img { background: #f0f0f0 !important; }
-      a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
-    }
-
-    /* ========== 移动端 ========== */
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2.2em; }
-      .hero p { font-size: 1em; }
-      section { padding: 50px 0; }
-      .nav-links { gap: 15px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张明 - 前端开发工程师</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <!-- 导航 -->
-  <nav>
     <div class="container">
-      <ul class="nav-links">
-        <li><a href="#about">关于</a></li>
-        <li><a href="#skills">技能</a></li>
-        <li><a href="#projects">项目</a></li>
-        <li><a href="#contact">联系</a></li>
-      </ul>
+        <header class="profile-header">
+            <div class="profile-image">
+                <!-- 替换为你的照片 -->
+                <img src="https://via.placeholder.com/150" alt="张明">
+            </div>
+            <div class="profile-info">
+                <h1>张明</h1>
+                <h2>资深前端开发工程师</h2>
+                <p class="tagline">用代码创造优雅的用户体验 | 5年前端开发经验</p>
+                <div class="contact-info">
+                    <a href="mailto:zhangming@example.com"><i class="fas fa-envelope"></i> zhangming@example.com</a>
+                    <a href="tel:+8613812345678"><i class="fas fa-phone"></i> +86 138 1234 5678</a>
+                    <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i> github.com/yourusername</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="section about">
+                <h3 class="section-title"><i class="fas fa-user"></i> 关于我</h3>
+                <p>拥有5年前端开发经验的资深工程师，专注于构建高性能、响应式的Web应用。精通现代JavaScript框架（React、Vue）和前端工程化实践。热衷于探索新技术，注重代码质量和用户体验，擅长将复杂的设计转化为直观的Web界面。</p>
+                <p>具备良好的团队协作能力和沟通技巧，曾主导多个大型项目的前端架构设计和实现，追求极致的性能优化和可访问性。</p>
+            </section>
+
+            <section class="section skills">
+                <h3 class="section-title"><i class="fas fa-laptop-code"></i> 专业技能</h3>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h4>前端框架</h4>
+                        <div class="skill-items">
+                            <span class="skill-item">React & Redux</span>
+                            <span class="skill-item">Vue.js & Vuex</span>
+                            <span class="skill-item">Angular</span>
+                            <span class="skill-item">Next.js</span>
+                            <span class="skill-item">Nuxt.js</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>编程语言</h4>
+                        <div class="skill-items">
+                            <span class="skill-item">JavaScript (ES6+)</span>
+                            <span class="skill-item">TypeScript</span>
+                            <span class="skill-item">HTML5 & CSS3</span>
+                            <span class="skill-item">Sass/SCSS</span>
+                            <span class="skill-item">Node.js (基础)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>工具与工程化</h4>
+                        <div class="skill-items">
+                            <span class="skill-item">Webpack</span>
+                            <span class="skill-item">Babel</span>
+                            <span class="skill-item">Git & GitHub</span>
+                            <span class="skill-item">Jest & Testing Library</span>
+                            <span class="skill-item">Docker (基础)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>其他技能</h4>
+                        <div class="skill-items">
+                            <span class="skill-item">PWA</span>
+                            <span class="skill-item">Web性能优化</span>
+                            <span class="skill-item">跨浏览器兼容性</span>
+                            <span class="skill-item">响应式设计</span>
+                            <span class="skill-item">可访问性(A11y)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section experience">
+                <h3 class="section-title"><i class="fas fa-briefcase"></i> 工作经历</h3>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <h4>高级前端开发工程师</h4>
+                        <div class="company-time">
+                            <span class="company">创新科技有限公司</span>
+                            <span class="time">2020年6月 - 至今</span>
+                        </div>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>负责公司核心产品前端架构设计，从Vue2升级到Vue3，提升应用性能40%</li>
+                        <li>主导前端微前端架构实施，将15+业务模块解耦，降低团队间协作成本</li>
+                        <li>实现组件库与设计系统，统一公司产品UI规范，提高开发效率30%</li>
+                        <li>优化首屏加载时间，通过代码分割、懒加载等技术将LCP降低55%</li>
+                        <li>带领3人前端团队，负责技术规划与代码审查，建立完善的单元测试体系</li>
+                    </ul>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <h4>前端开发工程师</h4>
+                        <div class="company-time">
+                            <span class="company">数字未来科技</span>
+                            <span class="time">2018年3月 - 2020年5月</span>
+                        </div>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>使用React + Redux开发企业级后台管理系统，支持10万+数据高效渲染</li>
+                        <li>实现数据可视化模块，使用D3.js和ECharts开发20+交互式图表组件</li>
+                        <li>优化前端构建流程，通过Webpack配置优化使构建时间减少60%</li>
+                        <li>参与制定前端代码规范，推动ESLint、Prettier在团队中的落地</li>
+                        <li>与UI/UX设计师紧密合作，实现高保真设计稿，并保持跨设备一致性</li>
+                    </ul>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <h4>初级前端开发工程师</h4>
+                        <div class="company-time">
+                            <span class="company">网络先锋科技</span>
+                            <span class="time">2017年7月 - 2018年2月</span>
+                        </div>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>使用jQuery和原生JavaScript维护和重构公司官网及内部系统</li>
+                        <li>实现响应式布局，确保网站在各种设备上完美展示</li>
+                        <li>开发和维护多个WordPress主题，定制插件功能</li>
+                        <li>学习并应用现代前端技术，为团队技术升级做准备</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section projects">
+                <h3 class="section-title"><i class="fas fa-project-diagram"></i> 项目经验</h3>
+                
+                <div class="project">
+                    <div class="project-header">
+                        <h4>企业级数据可视化平台</h4>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>TypeScript</span>
+                            <span>D3.js</span>
+                            <span>Ant Design</span>
+                            <span>WebSocket</span>
+                        </div>
+                    </div>
+                    <p class="project-desc">一个实时数据监控与分析平台，支持多维度数据筛选、自定义报表和实时数据更新。</p>
+                    <ul class="project-highlights">
+                        <li>重构核心渲染引擎，采用Web Worker处理大规模数据计算，提升图表渲染性能200%</li>
+                        <li>设计并实现可配置的报表生成系统，支持拖拽式布局和自定义公式</li>
+                        <li>实现离线数据缓存机制，确保弱网环境下操作流畅性</li>
+                        <li>项目上线后用户满意度提升45%，数据决策效率提高60%</li>
+                    </ul>
+                    <a href="https://github.com/yourusername/data-visualization-platform" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> 查看代码
+                    </a>
+                </div>
+                
+                <div class="project">
+                    <div class="project-header">
+                        <h4>电商平台PWA重构项目</h4>
+                        <div class="project-tech">
+                            <span>Vue.js</span>
+                            <span>Vuex</span>
+                            <span>Workbox</span>
+                            <span>Vuetify</span>
+                            <span>Node.js</span>
+                        </div>
+                    </div>
+                    <p class="project-desc">将传统电商网站重构为渐进式Web应用(PWA)，实现离线浏览、推送通知等功能。</p>
+                    <ul class="project-highlights">
+                        <li>通过Service Worker实现资源预缓存和运行时缓存，使离线访问率达到95%</li>
+                        <li>优化关键渲染路径，Lighthouse性能评分从45提升到92</li>
+                        <li>实现商品列表虚拟滚动，支持万级商品数据流畅展示</li>
+                        <li>设计并实现购物车状态持久化机制，确保离线状态下操作不丢失</li>
+                    </ul>
+                    <a href="https://github.com/yourusername/ecommerce-pwa" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> 查看代码
+                    </a>
+                </div>
+            </section>
+
+            <section class="section education">
+                <h3 class="section-title"><i class="fas fa-graduation-cap"></i> 教育背景</h3>
+                
+                <div class="education-item">
+                    <h4>计算机科学与技术 硕士</h4>
+                    <div class="education-details">
+                        <span class="school">北京理工大学</span>
+                        <span class="time">2014年9月 - 2017年6月</span>
+                    </div>
+                    <p>研究方向：人机交互与用户体验设计，发表2篇EI论文，获校级优秀毕业生</p>
+                </div>
+                
+                <div class="education-item">
+                    <h4>软件工程 学士</h4>
+                    <div class="education-details">
+                        <span class="school">北京邮电大学</span>
+                        <span class="time">2010年9月 - 2014年6月</span>
+                    </div>
+                    <p>主修课程：数据结构、算法设计、计算机网络、Web开发技术，GPA: 3.8/4.0</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>最后更新: <span id="last-updated"></span></p>
+            <p>© 2023 张明 - 本简历使用HTML、CSS和JavaScript打造，<a href="https://github.com/yourusername/yourusername.github.io" target="_blank">查看源码</a></p>
+        </footer>
     </div>
-  </nav>
 
-  <!-- Hero -->
-  <section class="hero" id="about">
-    <div class="container">
-      <img src="avatar.jpg" alt="李明轩" class="avatar" onerror="this.style.display='none'">
-      <h1>李明轩</h1>
-      <p>5 年经验前端工程师 | 专注用户体验与工程效率 | React / Vue / TypeScript</p>
-    </div>
-  </section>
-
-  <!-- 技能 -->
-  <section id="skills">
-    <div class="container">
-      <h2>🛠️ 我的技能</h2>
-      <div class="skills">
-        <span class="skill-tag">React</span>
-        <span class="skill-tag">Vue 3</span>
-        <span class="skill-tag">TypeScript</span>
-        <span class="skill-tag">Vite</span>
-        <span class="skill-tag">Webpack</span>
-        <span class="skill-tag">Next.js</span>
-        <span class="skill-tag">Tailwind CSS</span>
-        <span class="skill-tag">Ant Design</span>
-        <span class="skill-tag">Jest</span>
-        <span class="skill-tag">Git</span>
-        <span class="skill-tag">GitHub Actions</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- 项目 -->
-  <section id="projects">
-    <div class="container">
-      <h2>🚀 项目作品</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-img">[BI 数据可视化平台]</div>
-          <div class="project-content">
-            <h3>智能 BI 平台</h3>
-            <div class="project-tech">React · TypeScript · ECharts</div>
-            <p>动态看板拖拽布局，实时万级数据刷新，支持 PDF 导出。</p>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-img">[医疗小程序]</div>
-          <div class="project-content">
-            <h3>在线问诊小程序</h3>
-            <div class="project-tech">Taro · React · 微信小程序</div>
-            <p>音视频问诊 + 电子处方 + 支付闭环，启动时间 <1s。</p>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-img">[SaaS 后台]</div>
-          <div class="project-content">
-            <h3>SaaS 管理后台</h3>
-            <div class="project-tech">React · Vite · Ant Design Pro</div>
-            <p>首屏加载提速 60%，通用组件库被 5+ 项目复用。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 联系 -->
-  <section id="contact">
-    <div class="container">
-      <h2>📬 联系我</h2>
-      <div class="contact-card">
-        <p>📧 <a href="mailto:limingxuan@example.com">limingxuan@example.com</a></p>
-        <p>📱 (+86) 138-XXXX-XXXX</p>
-        <p>📍 上海</p>
-        <p>
-          GitHub: <a href="https://github.com/LMSH520" target="_blank">LMSH520</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 返回顶部 -->
-  <a href="#" id="back-to-top">↑</a>
-
-  <script>
-    // 返回顶部按钮显示/隐藏
-    window.addEventListener('scroll', () => {
-      const btn = document.getElementById('back-to-top');
-      if (window.scrollY > 300) {
-        btn.classList.add('show');
-      } else {
-        btn.classList.remove('show');
-      }
-    });
-
-    // 平滑滚动（兼容性处理）
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - 70,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
